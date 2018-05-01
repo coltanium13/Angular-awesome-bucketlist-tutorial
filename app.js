@@ -8,6 +8,7 @@ const config = require('./config/database');
 const bucketlist = require('./controllers/bucketlist');
 
 //Connect mongoose to our database
+mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, { useMongoClient: true });
 
 //Declaring Port
