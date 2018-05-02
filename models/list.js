@@ -1,6 +1,6 @@
 //Require mongoose package
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
+//mongoose.Promise = require('bluebird');
 //Define BucketlistSchema with title, description and category
 const BucketlistSchema = mongoose.Schema({
     title: {
