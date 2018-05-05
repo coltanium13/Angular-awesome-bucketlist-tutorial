@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+
+import {IArrayResult, IResult} from './types/rest.types';
+
 import { List } from '../models/List'
 
 import 'rxjs/add/operator/map';
@@ -15,25 +18,23 @@ export class ListService {
 
   constructor(private httpclient: HttpClient) { }
 
-  private serverApi= 'http://localhost:3000';
+  private serverApi = 'http://localhost:3000';
 
-  public getAllLists():Observable<List[]> {
-
+  public getAllLists(): Observable<IArrayResult<List>> {
     let URI = `${this.serverApi}/bucketlist/`;
-    return this.httpclient.get<List[]>(URI).map(data => data.lists);
+    return this.httpclient.get<IArrayResult<List>>(URI);
   }
 
-  public deleteList(listId : string) {
+  public deleteList(listId : string): Observable<IResult<List>> {
     let URI = `${this.serverApi}/bucketlist/${listId}`;
-    return this.httpclient.delete(URI, httpOptions)
+    return this.httpclient.delete<IResult<List>>(URI, httpOptions)
   }
 
-  public addList(list: List) {
+  public addList(list: List): Observable<IResult<List>> {
     let URI = `${this.serverApi}/bucketlist/`;
     let headers = new Headers;
     let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
-    console.log(body);
     headers.append('Content-Type', 'application/json');
-    return this.httpclient.post(URI, body ,httpOptions)
+    return this.httpclient.post<IResult<List>>(URI, body, httpOptions);
   }
 }

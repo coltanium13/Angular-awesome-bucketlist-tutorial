@@ -5,14 +5,17 @@ const bucketlist = require('../models/list');
 
 //GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
-    bucketlist.getAllLists((err, lists)=> {
-        if(err){
-            res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
+    bucketlist.getAllLists((err, lists) => {
+        let data = {};
+        if (err || null) {
+            data['error'] = err;
+            data['status'] = 400;
+        } else {
+            data['data'] = lists;
+            data['status'] = 200;
         }
-        else{
-            res.write(JSON.stringify({success: true, lists:lists},null,2));
-            res.end();
-        }
+    
+        res.json(data);
     })
 });
 
@@ -25,12 +28,16 @@ router.post('/', (req,res,next) => {
         category: req.body.category
     });
     bucketlist.addList(newList,(err, list) => {
-        if(err) {
-            res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
-
+        let data = {};
+        if (err || null) {
+            data['error'] = err;
+            data['status'] = 400;
+        } else {
+            data['data'] = list;
+            data['status'] = 200;
         }
-        else
-            res.json({success:true, message: "Added successfully."});
+    
+        res.json(data);
 
     });
 });
@@ -42,14 +49,16 @@ router.delete('/:id', (req,res,next)=> {
     let id = req.params.id;
     //Call the model method deleteListById
     bucketlist.deleteListById(id,(err,list) => {
-        if(err) {
-            res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
+        let data = {};
+        if (err || null) {
+            data['error'] = err;
+            data['status'] = 400;
+        } else {
+            data['data'] = list;
+            data['status'] = 200;
         }
-        else if(list) {
-            res.json({success:true, message: "Deleted successfully"});
-        }
-        else
-            res.json({success:false});
+    
+        res.json(data);
     })
 });
 

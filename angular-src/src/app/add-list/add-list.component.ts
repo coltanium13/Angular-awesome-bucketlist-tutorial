@@ -9,29 +9,33 @@ import { ListService } from '../services/list.service';
 })
 export class AddListComponent implements OnInit {
 
-  private newList :List;
+  private newList: List;
   @Output() addList: EventEmitter<List> = new EventEmitter<List>();
 
   constructor(private listServ: ListService) { }
 
   ngOnInit() {
-    this.newList = {
-      title: '',
-      category:'',
-      description:'',
-      _id:''
-
-    }
+    this.resetNewList();
+  }
+  
+  private resetNewList() {
+      this.newList = {
+          title: '',
+          category: '',
+          description: '',
+          _id: ''
+        }
   }
 
   public onSubmit() {
-    this.listServ.addList(this.newList).subscribe(
-      response=> {
-        if(response.success== true)
-        //If success, update the view-list component
-          this.addList.emit(this.newList);
-          },
-    );
+    this.listServ.addList(this.newList).subscribe((result) => {
+        if (result.error || null) {
+            // do something with the error
+        } else {
+            this.addList.emit(this.newList);
+            this.resetNewList();
+        }
+    });
 
   }
 }
