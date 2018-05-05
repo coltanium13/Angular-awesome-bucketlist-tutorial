@@ -23,15 +23,26 @@ export class ViewListComponent implements OnInit {
   public loadLists() {
 
     //Get all lists from server and update the lists property
-    this.listServ.getAllLists().subscribe(
-      response => this.lists = response,)
+    this.listServ.getAllLists().subscribe((result) => {
+        if (result.error || null) {
+            // do something with error here
+        } else {
+            this.lists = result.data;
+        }
+    });
 
   }
 
   //The deleted list is being filtered out using the .filter method
   public deleteList(list: List) {
-    this.listServ.deleteList(list._id).subscribe(
-      response =>	this.lists = this.lists.filter(lists => lists !== list),)
+    this.listServ.deleteList(list._id).subscribe((result) => {
+        if (result.error || null) {
+            // do something with error here
+        } else {
+            this.lists = this.lists.filter(lists => lists !== list);
+        }
+    });
+      //response =>	this.lists = this.lists.filter(lists => lists !== list),)
 
   }
 
