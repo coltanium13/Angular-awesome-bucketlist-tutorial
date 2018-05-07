@@ -33,6 +33,7 @@ export class AddListComponent implements OnInit {
             // do something with the error
         } else {
             this.addList.emit(result.data);
+            //test comment
             this.resetNewList();
         }
     });
