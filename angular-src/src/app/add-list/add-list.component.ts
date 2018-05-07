@@ -34,6 +34,7 @@ export class AddListComponent implements OnInit {
         } else {
             this.addList.emit(result.data);
             //test comment
+            //one more test
             this.resetNewList();
         }
     });
