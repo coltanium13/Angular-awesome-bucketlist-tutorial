@@ -17,7 +17,7 @@ export class AddListComponent implements OnInit {
   ngOnInit() {
     this.resetNewList();
   }
-  
+
   private resetNewList() {
       this.newList = {
           title: '',
@@ -32,7 +32,7 @@ export class AddListComponent implements OnInit {
         if (result.error || null) {
             // do something with the error
         } else {
-            this.addList.emit(this.newList);
+            this.addList.emit(result.data);
             this.resetNewList();
         }
     });
