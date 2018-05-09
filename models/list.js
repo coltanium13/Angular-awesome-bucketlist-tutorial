@@ -1,8 +1,9 @@
 //Require mongoose package
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 //mongoose.Promise = require('bluebird');
 //Define BucketlistSchema with title, description and category
-const BucketlistSchema = mongoose.Schema({
+var listSchema = Schema({
     title: {
         type: String,
         required: true
@@ -13,12 +14,18 @@ const BucketlistSchema = mongoose.Schema({
         required: true,
         enum: ['High', 'Medium', 'Low']
     },
-    items: [{
-        text: String
-    }]
+    items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
 });
 
-const BucketList = module.exports = mongoose.model('BucketList', BucketlistSchema );
+var itemSchema = Schema({
+    text: String
+});
+
+var List = mongoose.model('List', listSchema);
+//var Item = mongoose.model('Item', itemSchema);
+
+const BucketList = module.exports = mongoose.model('List', listSchema);
+//const Item= module.exports = mongoose.model('Item', itemSchema);
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
