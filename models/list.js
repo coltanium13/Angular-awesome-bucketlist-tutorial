@@ -21,16 +21,20 @@ var itemSchema = Schema({
     text: String
 });
 
-var List = mongoose.model('List', listSchema);
-//var Item = mongoose.model('Item', itemSchema);
+const List = mongoose.model('List', listSchema, 'lists');
+const Item = mongoose.model('Item', itemSchema, 'items');
+module.exports = {
+    List, Item,
+}
 
-const BucketList = module.exports = mongoose.model('List', listSchema);
+//const BucketList = module.exports = List;
 //const Item= module.exports = mongoose.model('Item', itemSchema);
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    BucketList.find(callback);
+    List.find(callback).populate('items');
 }
+
 
 //newList.save is used to insert the document into MongoDB
 module.exports.addList = (newList, callback) => {
@@ -41,5 +45,5 @@ module.exports.addList = (newList, callback) => {
 //We pass on an id and remove it from DB using Bucketlist.remove()
 module.exports.deleteListById = (id, callback) => {
     let query = {_id: id};
-    BucketList.remove(query, callback);
+    List.remove(query, callback);
 }
