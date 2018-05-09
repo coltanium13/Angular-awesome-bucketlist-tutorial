@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 
 import { AddListComponent } from './add-list/add-list.component';
 import { ViewListComponent } from './view-list/view-list.component';
-import {ListService} from './services/list.service'
+import {ListService} from './services/list.service';
+import { ListItemDetailsComponent } from './list-item-details/list-item-details.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     AddListComponent,
-    ViewListComponent
+    ViewListComponent,
+    ListItemDetailsComponent
   ],
   imports: [
     BrowserModule,

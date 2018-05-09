@@ -23,7 +23,8 @@ export class AddListComponent implements OnInit {
           title: '',
           category: '',
           description: '',
-          _id: ''
+          _id: '',
+          items:[]
         }
   }
 
@@ -33,8 +34,6 @@ export class AddListComponent implements OnInit {
             // do something with the error
         } else {
             this.addList.emit(result.data);
-            //test comment
-            //one more test
             this.resetNewList();
         }
     });

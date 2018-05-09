@@ -12,7 +12,10 @@ const BucketlistSchema = mongoose.Schema({
         type: String,
         required: true,
         enum: ['High', 'Medium', 'Low']
-    }
+    },
+    items: [{
+        text: String
+    }]
 });
 
 const BucketList = module.exports = mongoose.model('BucketList', BucketlistSchema );
