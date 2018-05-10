@@ -23,16 +23,16 @@ var itemSchema = Schema({
 
 const List = mongoose.model('List', listSchema, 'lists');
 const Item = mongoose.model('Item', itemSchema, 'items');
-module.exports = {
-    List, Item,
-}
+module.exports = List;
 
 //const BucketList = module.exports = List;
 //const Item= module.exports = mongoose.model('Item', itemSchema);
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    List.find(callback).populate('items');
+    List.find(callback);
+        /*.populate('items.text')
+        .exec(callback);*/
 }
 
 

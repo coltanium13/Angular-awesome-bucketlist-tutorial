@@ -25,7 +25,10 @@ router.post('/', (req,res,next) => {
     let newList = new bucketlist({
         title: req.body.title,
         description: req.body.description,
-        category: req.body.category
+        category: req.body.category,
+        items: [{
+            text: req.body.items
+        }]
     });
     bucketlist.addList(newList,(err, list) => {
         let data = {};
