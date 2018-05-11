@@ -1,4 +1,5 @@
-export interface List {
+export interface ListItem
+{
   _id?: string;
   listID: string;
   text: string;

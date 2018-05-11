@@ -18,7 +18,12 @@ var listSchema = Schema({
 });
 
 var itemSchema = Schema({
-    text: String
+    text: String,
+    listID: {
+        //Do i need this listID to tie back to the List??
+        type: String,
+        //required: true
+    }
 });
 
 const List = mongoose.model('List', listSchema, 'lists');
@@ -30,7 +35,7 @@ module.exports = List;
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    List.find(callback);
+    List.find(callback).populate('item.listID');
         /*.populate('items.text')
         .exec(callback);*/
 }

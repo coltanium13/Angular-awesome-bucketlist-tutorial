@@ -26,9 +26,8 @@ router.post('/', (req,res,next) => {
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
-        items: [{
-            text: req.body.items
-        }]
+        //How the fuck do i add my array of items to a list???
+        items: [req.body.items]
     });
     bucketlist.addList(newList,(err, list) => {
         let data = {};
