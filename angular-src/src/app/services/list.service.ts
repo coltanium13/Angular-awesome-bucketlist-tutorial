@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {IArrayResult, IResult} from './types/rest.types';
 
-import { List } from '../models/List'
+import { List } from '../models/List';
 
 import 'rxjs/add/operator/map';
 
@@ -32,7 +32,8 @@ export class ListService {
 
   public addList(list: List): Observable<IResult<List>> {
     let URI = `${this.serverApi}/bucketlist/`;
-    let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
+    let body = JSON.stringify({title: list.title, description: list.description, category: list.category,
+      items:[{ListItem: list.items[0].text}]});
     return this.httpclient.post<IResult<List>>(URI, body, httpOptions);
   }
 }

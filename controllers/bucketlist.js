@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const bucketlist = require('../models/list');
 
+var nestedProperty = require("nested-property");
+
 //GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
     bucketlist.getAllLists((err, lists) => {
@@ -22,12 +24,14 @@ router.get('/',(req,res) => {
 //POST HTTP method to /bucketlist
 
 router.post('/', (req,res,next) => {
+    var itemText = nestedProperty.get(req.body.items, 'text');
+
     let newList = new bucketlist({
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
         //How the fuck do i add my array of items to a list???
-        items: [req.body.items]
+        items: [itemText]
     });
     bucketlist.addList(newList,(err, list) => {
         let data = {};

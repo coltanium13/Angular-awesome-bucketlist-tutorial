@@ -35,7 +35,7 @@ module.exports = List;
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    List.find(callback).populate('item.listID');
+    List.find(callback).populate('items[0].text');
         /*.populate('items.text')
         .exec(callback);*/
 }

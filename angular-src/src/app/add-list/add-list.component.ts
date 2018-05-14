@@ -27,8 +27,7 @@ export class AddListComponent implements OnInit {
           description: '',
           _id: '',
           items:[{
-            text: '',
-            listID: '',
+            text: ''
           }]
         }
   }
