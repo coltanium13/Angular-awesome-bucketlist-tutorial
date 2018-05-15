@@ -16,6 +16,7 @@ export class ListItemDetailsComponent implements OnInit {
   }
 
   public DisplayListItems(list: List){
+    alert(list._id);
     this.displayList = list;
   }
 }

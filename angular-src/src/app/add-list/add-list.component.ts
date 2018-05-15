@@ -33,6 +33,7 @@ export class AddListComponent implements OnInit {
   }
 
   public onSubmit() {
+    alert()
     this.listServ.addList(this.newList).subscribe((result) => {
         if (result.error || null) {
             // do something with the error

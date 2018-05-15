@@ -33,7 +33,7 @@ export class ListService {
   public addList(list: List): Observable<IResult<List>> {
     let URI = `${this.serverApi}/bucketlist/`;
     let body = JSON.stringify({title: list.title, description: list.description, category: list.category,
-      items:[{ListItem: list.items[0].text}]});
+      items: list.items} );
     return this.httpclient.post<IResult<List>>(URI, body, httpOptions);
   }
 }

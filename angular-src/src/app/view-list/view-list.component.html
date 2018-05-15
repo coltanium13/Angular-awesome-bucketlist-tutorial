@@ -8,20 +8,19 @@
     <th>Title</th>
     <th>Description</th>
     <th>First Item</th>
-
   </tr>
   </thead>
   <tbody>
-  <tr (click)="ListDetails.DisplayListItems(list); " *ngFor="let list of lists">
+  <tr (click)="ListDetails.DisplayListItems(list)" *ngFor="let list of lists">
     <td>{{list.category}}</td>
     <td>{{list.title}}</td>
     <td>{{list.description}}</td>
     <td> <button type="button" (click)="deleteList(list); $event.stopPropagation();">Delete</button></td>
-
   </tr>
   </tbody>
-  <app-list-item-details #ListDetails></app-list-item-details>
 </table>
+
+<app-list-item-details #ListDetails style="text-align: left"></app-list-item-details>
 
 <app-add-list (addList)='onAddList($event)'> </app-add-list>
 

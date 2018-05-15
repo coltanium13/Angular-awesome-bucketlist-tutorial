@@ -24,14 +24,14 @@ router.get('/',(req,res) => {
 //POST HTTP method to /bucketlist
 
 router.post('/', (req,res,next) => {
-    var itemText = nestedProperty.get(req.body.items, 'text');
+    //var itemText = nestedProperty.get(req.body.items, 'text');
 
     let newList = new bucketlist({
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
         //How the fuck do i add my array of items to a list???
-        items: [itemText]
+        items: req.body.items
     });
     bucketlist.addList(newList,(err, list) => {
         let data = {};

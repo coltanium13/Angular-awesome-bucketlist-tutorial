@@ -5,7 +5,6 @@ export interface List {
   title: string;
   description: string;
   category: string;
-  items: ListItem[]
-    ;
+  items: ListItem[];
 
 }

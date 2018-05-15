@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 //mongoose.Promise = require('bluebird');
 //Define BucketlistSchema with title, description and category
+
+var itemSchema = Schema({
+    text: String
+});
+
 var listSchema = Schema({
     title: {
         type: String,
@@ -14,20 +19,13 @@ var listSchema = Schema({
         required: true,
         enum: ['High', 'Medium', 'Low']
     },
-    items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
+    items: [itemSchema]
 });
 
-var itemSchema = Schema({
-    text: String,
-    listID: {
-        //Do i need this listID to tie back to the List??
-        type: String,
-        //required: true
-    }
-});
+
 
 const List = mongoose.model('List', listSchema, 'lists');
-const Item = mongoose.model('Item', itemSchema, 'items');
+//const Item = mongoose.model('Item', itemSchema, 'items');
 module.exports = List;
 
 //const BucketList = module.exports = List;
@@ -35,7 +33,7 @@ module.exports = List;
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    List.find(callback).populate('items[0].text');
+    List.find(callback);
         /*.populate('items.text')
         .exec(callback);*/
 }
