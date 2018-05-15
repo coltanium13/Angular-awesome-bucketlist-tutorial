@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
-import { ListItem } from "../models/ListItem";
 import { ListService } from '../services/list.service';
 
 

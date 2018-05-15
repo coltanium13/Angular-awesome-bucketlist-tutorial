@@ -1,4 +1,5 @@
 //Require the express package and use express.Router()
+
 const express = require('express');
 const router = express.Router();
 const bucketlist = require('../models/list');
@@ -64,6 +65,27 @@ router.delete('/:id', (req,res,next)=> {
             data['status'] = 200;
         }
     
+        res.json(data);
+    })
+});
+
+router.put('/:id', (req, res, next)=> {
+    //access the parameter which is the id of the item to be deleted
+    let id = req.params.id;
+    let newItem = new bucketlist({
+        items: req.body.items
+    });
+    //Call the model method deleteListById
+    bucketlist.addListItemById(id, newItem,(err,list) => {
+        let data = {};
+        if (err || null) {
+            data['error'] = err;
+            data['status'] = 400;
+        } else {
+            data['data'] = list;
+            data['status'] = 200;
+        }
+
         res.json(data);
     })
 });

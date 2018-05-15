@@ -50,3 +50,9 @@ module.exports.deleteListById = (id, callback) => {
     let query = {_id: id};
     List.remove(query, callback);
 }
+
+module.exports.addListItemById = (id, newItem, callback) => {
+    let query = {_id: id,
+                 items: newItem};
+    List.put(query, callback);
+}

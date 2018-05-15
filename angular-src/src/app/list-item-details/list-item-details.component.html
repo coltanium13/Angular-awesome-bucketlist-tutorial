@@ -7,6 +7,9 @@
         <input type="text" [(ngModel)]="item.text" name="itemText">
       </li>
     </ul>
+
+    <input type="text" #newItemText />
+    <button type="button" #AddNewItemButton (click)="AddNewItem(displayList._id, newItemText.value); newItemText.value=''"> Add ToDo Item</button>
   </div>
 
 </div>
