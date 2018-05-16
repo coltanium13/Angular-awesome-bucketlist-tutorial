@@ -20,6 +20,7 @@ export class ListService {
   constructor(private httpclient: HttpClient) { }
 
   private serverApi = 'http://localhost:3000';
+  private newItem: ListItem = {text: ''};
 
   public getAllLists(): Observable<IArrayResult<List>> {
     let URI = `${this.serverApi}/bucketlist/`;
@@ -44,9 +45,10 @@ export class ListService {
   }
 
   public addListItem(listID: string, listItem: string){
+    this.newItem.text = listItem;
     let URI = `${this.serverApi}/bucketlist/${listID}`;
-    let body = JSON.stringify({text: listItem} );
+    let body = JSON.stringify({item: this.newItem} );
 
-    return this.httpclient.put<IResult<List>>(URI, body, httpOptions)
+    return this.httpclient.post<IResult<List>>(URI, body, httpOptions)
   }
 }

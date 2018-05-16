@@ -51,8 +51,8 @@ module.exports.deleteListById = (id, callback) => {
     List.remove(query, callback);
 }
 
-module.exports.addListItemById = (id, newItem, callback) => {
-    let query = {_id: id,
+module.exports.addListItemById = (listId, newItem, callback) => {
+    let query = {_id: listId,
                  items: newItem};
-    List.put(query, callback);
+    List.save(query, callback);
 }

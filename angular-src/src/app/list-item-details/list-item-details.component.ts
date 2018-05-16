@@ -11,7 +11,6 @@ import {ListService} from "../services/list.service";
 export class ListItemDetailsComponent implements OnInit {
 
   private displayList: List;
-  private newListItem: ListItem;
 
   constructor(private listServ: ListService) { }
 
