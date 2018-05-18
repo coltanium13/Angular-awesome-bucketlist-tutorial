@@ -33,7 +33,7 @@ module.exports = List;
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    List.find(callback);
+    List.find(callback).then(console.log("get all lists"));
         /*.populate('items.text')
         .exec(callback);*/
 }
@@ -52,7 +52,8 @@ module.exports.deleteListById = (id, callback) => {
 }
 
 module.exports.addListItemById = (listId, newItem, callback) => {
+    console.log(listId + 'item:' + newItem);
     let query = {_id: listId,
-                 items: newItem};
-    List.save(query, callback);
+                 $push: {items: newItem}};
+    List.update(query, callback).then(console.log("add new item"));
 }

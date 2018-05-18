@@ -46,8 +46,8 @@ export class ListService {
 
   public addListItem(listID: string, listItem: string){
     this.newItem.text = listItem;
-    let URI = `${this.serverApi}/bucketlist/${listID}`;
-    let body = JSON.stringify({item: this.newItem} );
+    let URI = `${this.serverApi}/bucketlist/`;
+    let body = JSON.stringify({_id: listID, item: this.newItem} );
 
     return this.httpclient.post<IResult<List>>(URI, body, httpOptions)
   }
