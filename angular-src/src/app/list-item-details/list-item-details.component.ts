@@ -22,12 +22,13 @@ export class ListItemDetailsComponent implements OnInit {
   }
 
   public UpdateList(list: List){
-    alert('updated' + list._id);
     this.listServ.updateList(list).subscribe((result) => {
       if (result.error || null) {
         // do something with the error
+        alert('Error Updating!');
       } else {
         //do something if update went well
+        alert('Update Successful!');
       }
     });
   }

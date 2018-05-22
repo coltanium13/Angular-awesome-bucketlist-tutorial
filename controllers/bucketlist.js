@@ -71,29 +71,40 @@ router.delete('/:id', (req,res,next)=> {
 
 router.put('/:id', (req, res, next)=> {
     //access the parameter which is the id of the item to be deleted
-
     let listId = req.params.id;
-    let title = req.body.title;
-    let description = req.body.description;
-    let category = req.body.category;
-    let items = req.body.items;
+    //var o_id = new ObjectId(listId);
+    bucketlist.findOne({_id: listId}, function (err, result) {
+        if(err || null){
+            let data = {};
+            if (err || null) {
+                data['error'] = err;
+                data['status'] = 400;
+            }
+            res.json(data);
+        }
+        console.log('Controller listToUpdateTitle: ' + result.title);
 
-    console.log("addItemParamsController:" + listId + 'body' +  req.body.items);
+        result.title = req.body.title;
+        result.description = req.body.description;
+        result.category = req.body.category;
+        result.items = req.body.items;
+        //Call the model method deleteListById
+    }).then(function(result){
+        bucketlist.updateList(result, (err, list) => {
 
-    //Call the model method deleteListById
-    bucketlist.updateList(listId, req.body,(err,list) => {
-        console.log("addItemParams:" + listId);
         let data = {};
         if (err || null) {
             data['error'] = err;
             data['status'] = 400;
+            console.log('Error in updateController callback');
         } else {
             data['data'] = list;
             data['status'] = 200;
+            console.log("updateListControllerCallback:" + list.title);
         }
-        console.log("post new item controller");
         res.json(data);
-    })
+    })});
+
 });
 
 module.exports = router;

@@ -33,7 +33,7 @@ module.exports = List;
 
 //BucketList.find() returns all the lists
 module.exports.getAllLists = (callback) => {
-    List.find(callback).then(console.log("get all lists1"));
+    List.find(callback).then(console.log("get all lists"));
         /*.populate('items.text')
         .exec(callback);*/
 }
@@ -44,14 +44,9 @@ module.exports.addList = (newList, callback) => {
     newList.save(callback);
 }
 
-module.exports.updateList = (listId, body, callback) => {
-    console.log('updateList'+ body);
-    const list = List.findById(listId);
-    list.title = body.title;
-    list.description = body.description;
-    list.category = body.category;
-    list.items = body.items;
-    list.update(callback);
+module.exports.updateList = (listToUpdate, callback) => {
+    console.log('Model updateListTitle: '+ listToUpdate._id);
+    listToUpdate.update({_id: listToUpdate._id}, callback);
 }
 
 //We pass on an id and remove it from DB using Bucketlist.remove()

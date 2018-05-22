@@ -52,15 +52,12 @@ export class ListService {
     this.newItem.text = listItem;
     let URI = `${this.serverApi}/bucketlist/${listID}`;
     let body = JSON.stringify({_id: listID, items: this.newItem} );
-    alert('body: ' + body);
     return this.httpclient.put<IResult<List>>(URI, body, httpOptions).pipe(tap(_res => (console.log('add list item service res: ' + _res))));
   }
 
   public updateList(list: List): Observable<IResult<List>>{
     let URI = `${this.serverApi}/bucketlist/${list._id}`;
     let body = JSON.stringify({list} );
-    alert('update list service' + URI);
-    alert('body: ' + body);
     return this.httpclient.put<IResult<List>>(URI, body, httpOptions);
   }
 }
