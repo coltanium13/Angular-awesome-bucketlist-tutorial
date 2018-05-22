@@ -69,15 +69,18 @@ router.delete('/:id', (req,res,next)=> {
     })
 });
 
-router.post('/:id/:newItem', (req, res, next)=> {
+router.put('/:id', (req, res, next)=> {
     //access the parameter which is the id of the item to be deleted
+    console.log("addItemParamsController:" + req.params);
     let listId = req.params.id;
-    let newItem = new bucketlist({
-        items: req.body.items
-    });
+    let title = req.body.title;
+    let description = req.body.description;
+    let category = req.body.category;
+    let items = req.body.items;
+
     //Call the model method deleteListById
-    bucketlist.addListItemById(listId, newItem,(err,list) => {
-        console.log("Controller:" + listId + "NewItem: " + newItem);
+    bucketlist.updateList(listId, req.body,(err,list) => {
+        console.log("addItemParams:" + req.params);
         let data = {};
         if (err || null) {
             data['error'] = err;
@@ -86,9 +89,8 @@ router.post('/:id/:newItem', (req, res, next)=> {
             data['data'] = list;
             data['status'] = 200;
         }
-
-        res.json(data);
         console.log("post new item controller");
+        res.json(data);
     })
 });
 

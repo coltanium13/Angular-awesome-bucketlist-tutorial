@@ -21,6 +21,11 @@ export class ListItemDetailsComponent implements OnInit {
     this.displayList = list;
   }
 
+  public UpdateList(list: List){
+    alert('updated' + list._id);
+    this.listServ.updateList(list);
+  }
+
   public  AddNewItem(listID: string, newItem: string): void{
     //alert(listID + newItem);
     this.listServ.addListItem(listID, newItem)

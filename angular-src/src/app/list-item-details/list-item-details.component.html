@@ -5,6 +5,7 @@
     <ul>
       <li *ngFor="let item of displayList.items">
         <input type="text" [(ngModel)]="item.text" name="itemText">
+        <button type="button" #UpdateListButton (click)="UpdateList(item);"> Update </button>
       </li>
     </ul>
 

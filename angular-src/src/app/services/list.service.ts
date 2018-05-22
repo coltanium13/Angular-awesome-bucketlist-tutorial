@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import { catchError, map, tap} from 'rxjs/operators';
 
 import {IArrayResult, IResult} from './types/rest.types';
 
@@ -24,7 +25,10 @@ export class ListService {
 
   public getAllLists(): Observable<IArrayResult<List>> {
     let URI = `${this.serverApi}/bucketlist/`;
-    return this.httpclient.get<IArrayResult<List>>(URI);
+    return this.httpclient.get<IArrayResult<List>>(URI)
+      .pipe(
+        tap(_res => console.log('GetAllLists: ' + _res.data))
+      );
   }
 
   public getList(listID: string): Observable<IResult<List>> {
@@ -44,11 +48,18 @@ export class ListService {
     return this.httpclient.post<IResult<List>>(URI, body, httpOptions);
   }
 
-  public addListItem(listID: string, listItem: string){
+  public addListItem(listID: string, listItem: string): Observable<IResult<List>>{
     this.newItem.text = listItem;
-    let URI = `${this.serverApi}/bucketlist/`;
-    let body = JSON.stringify({_id: listID, item: this.newItem} );
+    let URI = `${this.serverApi}/bucketlist/${listID}`;
+    let body = JSON.stringify({_id: listID, items: this.newItem} );
+    alert('body: ' + body);
+    return this.httpclient.put<IResult<List>>(URI, body, httpOptions).pipe(tap(_res => (console.log('add list item service res: ' + _res))));
+  }
 
-    return this.httpclient.post<IResult<List>>(URI, body, httpOptions)
+  public updateList(list: List): Observable<IResult<List>>{
+    let URI = `${this.serverApi}/bucketlist/${list._id}`;
+    let body = JSON.stringify({list} );
+    alert('update list service' + URI);
+    return this.httpclient.put<IResult<List>>(URI, body, httpOptions);
   }
 }
