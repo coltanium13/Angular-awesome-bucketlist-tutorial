@@ -60,6 +60,7 @@ export class ListService {
     let URI = `${this.serverApi}/bucketlist/${list._id}`;
     let body = JSON.stringify({list} );
     alert('update list service' + URI);
+    alert('body: ' + body);
     return this.httpclient.put<IResult<List>>(URI, body, httpOptions);
   }
 }

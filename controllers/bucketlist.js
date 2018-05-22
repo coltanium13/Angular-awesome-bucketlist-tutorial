@@ -71,16 +71,18 @@ router.delete('/:id', (req,res,next)=> {
 
 router.put('/:id', (req, res, next)=> {
     //access the parameter which is the id of the item to be deleted
-    console.log("addItemParamsController:" + req.params);
+
     let listId = req.params.id;
     let title = req.body.title;
     let description = req.body.description;
     let category = req.body.category;
     let items = req.body.items;
 
+    console.log("addItemParamsController:" + listId + 'body' +  req.body.items);
+
     //Call the model method deleteListById
     bucketlist.updateList(listId, req.body,(err,list) => {
-        console.log("addItemParams:" + req.params);
+        console.log("addItemParams:" + listId);
         let data = {};
         if (err || null) {
             data['error'] = err;

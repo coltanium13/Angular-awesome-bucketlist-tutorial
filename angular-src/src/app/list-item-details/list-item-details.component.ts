@@ -23,12 +23,24 @@ export class ListItemDetailsComponent implements OnInit {
 
   public UpdateList(list: List){
     alert('updated' + list._id);
-    this.listServ.updateList(list);
+    this.listServ.updateList(list).subscribe((result) => {
+      if (result.error || null) {
+        // do something with the error
+      } else {
+        //do something if update went well
+      }
+    });
   }
 
   public  AddNewItem(listID: string, newItem: string): void{
     //alert(listID + newItem);
-    this.listServ.addListItem(listID, newItem)
+    this.listServ.addListItem(listID, newItem).subscribe((result) => {
+      if (result.error || null) {
+        // do something with the error
+      } else {
+        //show the newly added item in the list detail list
+      }
+    });
   }
   //todo: make function to add new item to list. Add html. list sevice put??
 
