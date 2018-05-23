@@ -58,6 +58,7 @@ export class ListService {
   public updateList(list: List): Observable<IResult<List>>{
     let URI = `${this.serverApi}/bucketlist/${list._id}`;
     let body = JSON.stringify({list} );
+    alert('update items:' + body);
     return this.httpclient.put<IResult<List>>(URI, body, httpOptions);
   }
 }

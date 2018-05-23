@@ -72,39 +72,23 @@ router.delete('/:id', (req,res,next)=> {
 router.put('/:id', (req, res, next)=> {
     //access the parameter which is the id of the item to be deleted
     let listId = req.params.id;
-    //var o_id = new ObjectId(listId);
-    bucketlist.findOne({_id: listId}, function (err, result) {
-        if(err || null){
-            let data = {};
-            if (err || null) {
-                data['error'] = err;
-                data['status'] = 400;
-            }
-            res.json(data);
-        }
-        console.log('Controller listToUpdateTitle: ' + result.title);
+    let updatedList = req.body.list;
 
-        result.title = req.body.title;
-        result.description = req.body.description;
-        result.category = req.body.category;
-        result.items = req.body.items;
-        //Call the model method deleteListById
-    }).then(function(result){
-        bucketlist.updateList(result, (err, list) => {
+    bucketlist.updateList(updatedList, (err, list) => {
 
-        let data = {};
-        if (err || null) {
-            data['error'] = err;
-            data['status'] = 400;
-            console.log('Error in updateController callback');
-        } else {
-            data['data'] = list;
-            data['status'] = 200;
-            console.log("updateListControllerCallback:" + list.title);
-        }
-        res.json(data);
-    })});
+    let data = {};
+    if (err || null) {
+        data['error'] = err;
+        data['status'] = 400;
+        console.log('Error in updateController callback');
+    } else {
+        data['data'] = list;
+        data['status'] = 200;
+        console.log("updateListControllerCallback:" + JSON.stringify(list));
+    }
+    res.json(data);});
 
 });
+
 
 module.exports = router;

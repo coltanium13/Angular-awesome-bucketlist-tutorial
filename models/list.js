@@ -46,7 +46,16 @@ module.exports.addList = (newList, callback) => {
 
 module.exports.updateList = (listToUpdate, callback) => {
     console.log('Model updateListTitle: '+ listToUpdate._id);
-    listToUpdate.update({_id: listToUpdate._id}, callback);
+    /*var newValues = {$set: {
+        title: listToUpdate.title,
+            description: listToUpdate.description,
+            category: listToUpdate.category,
+            items: listToUpdate.items
+        }};*/
+    console.log('model newValues: ' + JSON.stringify(listToUpdate));
+    var newValues = {$set: {listToUpdate}};
+    //console.log('newValues: ' + JSON.stringify(newValues));
+    List.update({_id: listToUpdate._id}, {items: listToUpdate.items}, callback);
 }
 
 //We pass on an id and remove it from DB using Bucketlist.remove()
