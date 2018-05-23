@@ -7,12 +7,13 @@
     "start": "node app"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "~1.17.2",
     "cors": "~2.8.3",
     "express": "~4.15.3",
     "mongoose": "~4.11.0",
-    "npm": "^6.0.0",
-    "bluebird": "^3.5.1"
+    "nested-property": "~0.0.7",
+    "npm": "^6.0.0"
   },
   "author": "",
   "license": "ISC"

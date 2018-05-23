@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
 import { ListService } from '../services/list.service';
 
+
 @Component({
   selector: 'app-add-list',
   templateUrl: './add-list.component.html',
@@ -23,7 +24,10 @@ export class AddListComponent implements OnInit {
           title: '',
           category: '',
           description: '',
-          _id: ''
+          _id: '',
+          items:[{
+            text: ''
+          }]
         }
   }
 

@@ -1,0 +1,16 @@
+<div *ngIf="displayList">
+
+  <h2>{{ displayList.title | uppercase }} List Details</h2>
+  <div>
+    <ul>
+      <li *ngFor="let item of displayList.items">
+        <input type="text" [(ngModel)]="item.text" name="itemText">
+        <button type="button" #UpdateListButton (click)="UpdateList(displayList);"> Update </button>
+      </li>
+    </ul>
+
+    <input type="text" #newItemText />
+    <button type="button" #AddNewItemButton (click)="AddNewItem(displayList._id, newItemText.value); newItemText.value=''"> Add ToDo Item</button>
+  </div>
+
+</div>
