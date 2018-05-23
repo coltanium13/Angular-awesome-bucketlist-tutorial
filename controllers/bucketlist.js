@@ -79,7 +79,7 @@ router.put('/:id', (req, res, next)=> {
                 -                data['error'] = err;
                 -                data['status'] = 400;
                 -            }
-            -            res.json(data);
+            -            res.json(data);test
             -        }*/
 
     let listId = req.params.id;
