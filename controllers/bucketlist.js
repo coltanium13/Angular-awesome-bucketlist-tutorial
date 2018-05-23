@@ -71,6 +71,17 @@ router.delete('/:id', (req,res,next)=> {
 
 router.put('/:id', (req, res, next)=> {
     //access the parameter which is the id of the item to be deleted
+    //TODO: Do i need the id in the params? Im not using it. Should i use it to find the doc?
+    /*bucketlist.findOne({_id: listId}, function (err, result) {
+        -        if(err || null){
+            -            let data = {};
+            -            if (err || null) {
+                -                data['error'] = err;
+                -                data['status'] = 400;
+                -            }
+            -            res.json(data);
+            -        }*/
+
     let listId = req.params.id;
     let updatedList = req.body.list;
 
